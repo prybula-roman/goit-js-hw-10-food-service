@@ -1,0 +1,19 @@
+{
+  "name": "home_10",
+  "version": "1.0.0",
+  "description": "homework_10",
+  "main": "./js/index.js",
+  "scripts": {
+    "start": "node ./js/index.js",
+    "dev": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prybula Roman",
+  "license": "ISC",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "devDependencies": {
+    "parcel-plugin-handlebars-precompile": "^1.0.2"
+  }
+}
