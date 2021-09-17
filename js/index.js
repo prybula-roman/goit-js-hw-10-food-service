@@ -1,17 +1,36 @@
-console.log("i'm working");
 import gallery from "../menu.json";
 import template from "../template/templ.hbs";
-console.log("gallery:", gallery);
-console.log(template);
+//localStorage.setItem("theme", "light-theme");
+//localStorage.clear();
 const listCards = document.querySelector(".menu");
-console.log("listCards:", listCards);
-//const galleryMap = gallery.map({ gallery });
 listCards.insertAdjacentHTML("beforeend", template(gallery));
 
-// gallery.forEach((element) => {
-//   //  template(element);
-//   listCards.insertAdjacentHTML("bforeend", template(element));
-//   console.log(element.id);
-// });
+const body = document.querySelector("body");
+//console.log(localStorage.getItem("theme"));
 
-//listCards.insertAdjacentHTML("beforeend", galleryMap);
+body.classList.add(localStorage.getItem("theme"));
+
+const inp = document.querySelector(".theme-switch__toggle");
+//console.dir(inp);
+inp.addEventListener("click", () => {
+  if (!body.classList.contains("dark-theme")) {
+    localStorage.setItem("theme", "dark-theme");
+    localStorage.setItem("isChecked", "true");
+
+    console.log(inp.classList);
+    body.classList.add(localStorage.getItem("theme"));
+    console.log("++++", localStorage.getItem("isChecked"));
+    inp.checked = true;
+    // console.log("++++", inp.checked);
+  } else {
+    localStorage.setItem("theme", "light-theme");
+
+    console.log(inp.classList);
+    localStorage.setItem("checked", "false");
+
+    body.classList.remove("dark-theme");
+    console.log("----", localStorage.getItem("isChecked"));
+    inp.checked = false;
+    // console.log("----", inp.checked);
+  }
+});

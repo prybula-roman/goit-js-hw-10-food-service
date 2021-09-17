@@ -2198,9 +2198,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var templateFunction = _handlebars.default.template({
   "1": function _(container, depth0, helpers, partials, data) {
-    var helper,
+    var stack1,
+        helper,
         alias1 = container.lambda,
         alias2 = container.escapeExpression,
+        alias3 = depth0 != null ? depth0 : container.nullContext || {},
         lookupProperty = container.lookupProperty || function (parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -2209,7 +2211,7 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "  <li class=\"menu__item\">\r\n    <article class=\"card\">\r\n      <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "image") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "name") : depth0, depth0)) + "\" class=\"card__image\" />\r\n      <div class=\"card__content\">\r\n        <h2 class=\"card__name\">" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "name") : depth0, depth0)) + "</h2>\r\n        <p class=\"card__price\">\r\n          <i class=\"material-icons\"> monetization_on </i>\r\n          " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "price") : depth0, depth0)) + "\r\n          кредитов\r\n        </p>\r\n\r\n        <p class=\"card__descr\">" + alias2((helper = (helper = lookupProperty(helpers, "description") || (depth0 != null ? lookupProperty(depth0, "description") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+    return "  <li class=\"menu__item\">\r\n    <article class=\"card\">\r\n      <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "image") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "name") : depth0, depth0)) + "\" class=\"card__image\" />\r\n      <div class=\"card__content\">\r\n        <h2 class=\"card__name\">" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "name") : depth0, depth0)) + "</h2>\r\n        <p class=\"card__price\">\r\n          <i class=\"material-icons\"> monetization_on </i>\r\n          " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "price") : depth0, depth0)) + "\r\n          кредитов\r\n        </p>\r\n\r\n        <p class=\"card__descr\">" + alias2((helper = (helper = lookupProperty(helpers, "description") || (depth0 != null ? lookupProperty(depth0, "description") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(alias3, {
       "name": "description",
       "hash": {},
       "data": data,
@@ -2223,7 +2225,26 @@ var templateFunction = _handlebars.default.template({
           "column": 46
         }
       }
-    }) : helper)) + "</p>\r\n      </div>\r\n\r\n      <button class=\"card__button button\">\r\n        <i class=\"material-icons button__icon\"> shopping_cart </i>\r\n        В корзину\r\n      </button>\r\n    </article>\r\n  </li>\r\n";
+    }) : helper)) + "</p>\r\n        <ul class=\"tag-list\">\r\n" + ((stack1 = lookupProperty(helpers, "each").call(alias3, depth0 != null ? lookupProperty(depth0, "ingredients") : depth0, {
+      "name": "each",
+      "hash": {},
+      "fn": container.program(2, data, 0),
+      "inverse": container.noop,
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 15,
+          "column": 10
+        },
+        "end": {
+          "line": 23,
+          "column": 19
+        }
+      }
+    })) != null ? stack1 : "") + "        </ul>\r\n      </div>\r\n\r\n      <button class=\"card__button button\">\r\n        <i class=\"material-icons button__icon\"> shopping_cart </i>\r\n        В корзину\r\n      </button>\r\n    </article>\r\n  </li>\r\n";
+  },
+  "2": function _(container, depth0, helpers, partials, data) {
+    return "            <li>" + container.escapeExpression(container.lambda(depth0, depth0)) + "</li>\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function main(container, depth0, helpers, partials, data) {
@@ -2268,18 +2289,32 @@ var _templ = _interopRequireDefault(require("../template/templ.hbs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log("i'm working");
-console.log("gallery:", _menu.default);
-console.log(_templ.default);
+//localStorage.setItem("theme", "light-theme");
+//localStorage.clear();
 var listCards = document.querySelector(".menu");
-console.log("listCards:", listCards); //const galleryMap = gallery.map({ gallery });
+listCards.insertAdjacentHTML("beforeend", (0, _templ.default)(_menu.default));
+var body = document.querySelector("body"); //console.log(localStorage.getItem("theme"));
 
-listCards.insertAdjacentHTML("beforeend", (0, _templ.default)(_menu.default)); // gallery.forEach((element) => {
-//   //  template(element);
-//   listCards.insertAdjacentHTML("bforeend", template(element));
-//   console.log(element.id);
-// });
-//listCards.insertAdjacentHTML("beforeend", galleryMap);
+body.classList.add(localStorage.getItem("theme"));
+var inp = document.querySelector(".theme-switch__toggle"); //console.dir(inp);
+
+inp.addEventListener("click", function () {
+  if (!body.classList.contains("dark-theme")) {
+    localStorage.setItem("theme", "dark-theme");
+    localStorage.setItem("isChecked", "true");
+    console.log(inp.classList);
+    body.classList.add(localStorage.getItem("theme"));
+    console.log("++++", localStorage.getItem("isChecked"));
+    inp.checked = true; // console.log("++++", inp.checked);
+  } else {
+    localStorage.setItem("theme", "light-theme");
+    console.log(inp.classList);
+    localStorage.setItem("checked", "false");
+    body.classList.remove("dark-theme");
+    console.log("----", localStorage.getItem("isChecked"));
+    inp.checked = false; // console.log("----", inp.checked);
+  }
+});
 },{"../menu.json":"menu.json","../template/templ.hbs":"template/templ.hbs"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -2308,7 +2343,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55401" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53891" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

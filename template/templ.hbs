@@ -11,9 +11,9 @@
         </p>
 
         <p class="card__descr">{{description}}</p>
-        {{!-- <ul class="tag-list">
-          {{#each tag-list__item}}
-            <li>{{igredients}}</li>
+        <ul class="tag-list">
+          {{#each ingredients}}
+            <li>{{this}}</li>
             {{! <li class="tag-list__item">Картофель</li>
         <li class="tag-list__item">Чеснок</li>
         <li class="tag-list__item">Сметана</li>
@@ -21,7 +21,7 @@
         <li class="tag-list__item">Твердый сыр</li>
         <li class="tag-list__item">Зеленый лук</li> }}
           {{/each}}
-        </ul> --}}
+        </ul>
       </div>
 
       <button class="card__button button">
