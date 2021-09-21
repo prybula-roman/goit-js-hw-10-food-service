@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node ./js/index.js",
     "dev": "parcel index.html",
-    "build": "parcel build index.html --public-url /goit-js-hw-10-food-service",
+    "build": "parcel build index.html --public-url /goit-js-hw-10-food-service --no-content-hash",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy":"gh-pages -d dist",
-    "predeploy":"npm run build"
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "repository": {
     "type": "git",
